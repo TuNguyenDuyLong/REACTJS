@@ -1,6 +1,6 @@
 import './App.css';
 import logo from './logo.svg'
-import Test from '../src/components/component'
+//import Test from './components/AddComponent'
 import Form from '../src/components/form'
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <p>
           Hello word with React.js: tndragon01@gmail.com
         </p>
-        <Test />
+        {/* <Test /> */}
         <Form />
 
       </header>

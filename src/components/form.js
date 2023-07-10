@@ -1,44 +1,41 @@
 import React from 'react';
 import Childcomponent from './ChildComponent'
+import AddComponent from './AddComponent'
 class Component extends React.Component {
     state = {
-        FisrtName: '',
-        LastName: ''
+        arrayJob: [
+            { id: '001', title: 'Dev', Salary: '500$' },
+            { id: '002', title: 'Tes', Salary: '600$' },
+            { id: '003', title: 'BA', Salary: '800$' }
+        ]
     }
-    handleChangeFisrtName = (event) => {
+    AddNewJob = (Job) => {
+        let currenjob = this.state.arrayJob;
+        currenjob.push(Job)
         this.setState({
-            FisrtName: event.target.value
+            arrayJob: currenjob
+
+            //Cách 2: arrayJob: [...this.state.arrayJob, Job]
+
         })
     }
-    handleChangeLastName = (event) => {
+    DeleteAJob = (Job) => {
+        let currenjob = this.state.arrayJob
+        currenjob = currenjob.filter(item => item.id !== Job.id)
         this.setState({
-            LastName: event.target.value
+            arrayJob: currenjob
         })
     }
-    handleSubmit = (event) => {
-        event.preventDefault() // Sự kiện không cho load lại trang
-    }
-
-
     render() {
         return (
             <>
-                <form>
-                    <label htmlFor="fname">First name:</label><br />
-                    <input type="text" value={this.state.FisrtName}
-                        onChange={(event) => this.handleChangeFisrtName(event)} /><br />
-                    <label htmlFor="lname">Last name:</label><br />
-                    <input type="text" value={this.state.LastName}
-                        onChange={(event) => this.handleChangeLastName(event)} /><br /><br />
-                    <input type="submit" value="submit"
-                        onClick={(event) => this.handleSubmit(event)} // Sự kiện không cho load lại trang
+                <AddComponent
+                    AddNewJob={this.AddNewJob} />
+                {/* <div>Full name {this.state.FisrtName} {this.state.LastName}</div> */}
 
-
-                    />
-                </form>
-                <div>Full name {this.state.FisrtName} {this.state.LastName}</div>
-
-                <Childcomponent />
+                <Childcomponent
+                    arrayJob={this.state.arrayJob}
+                    DeleteAJob={this.DeleteAJob} />
             </>
         );
     }
